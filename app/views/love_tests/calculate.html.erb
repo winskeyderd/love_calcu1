@@ -1,0 +1,15 @@
+<h1>Love Calculator Results</h1>
+
+<p><strong>Love Match:</strong> <%= @love_percentage %>%</p>
+<p><strong>Message:</strong> <%= @love_message %></p>
+
+<h2>Recent Calculations</h2>
+<ul>
+  <% @recent_calculations.each do |calc| %>
+    <li>
+      <%= calc.given_name_a %> <%= calc.surname_a %> ❤️
+      <%= calc.given_name_b %> <%= calc.surname_b %>:
+      <%= calc.created_at.strftime("%b %d, %Y") %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,32 @@
+<h4 class="text-center mb-3 flames-result">Welcome Back</h4>
+
+<div class="d-flex justify-content-center">
+  <div class="mystical-card p-3" style="max-width: 400px; width: 100%;">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-3">
+        <%= f.label :email, class: "form-label small mb-1" %>
+        <%= f.email_field :email, class: "form-control-mystical form-control-sm", autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, class: "form-label small mb-1" %>
+        <%= f.password_field :password, class: "form-control-mystical form-control-sm", autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check mb-3">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, class: "form-check-label small" %>
+        </div>
+      <% end %>
+
+      <div class="d-grid">
+        <%= f.submit "Log in", class: "btn btn-mystical btn-sm" %>
+      </div>
+    <% end %>
+
+    <div class="mt-2 text-center small">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

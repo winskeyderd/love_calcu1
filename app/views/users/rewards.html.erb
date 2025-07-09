@@ -1,0 +1,12 @@
+<div class="card-body text-center p-4">
+  <% if @daily_quote.present? %>
+    <div class="tarot-message" style="font-size: 1.2rem; border-left-color: var(--accent-gold);">
+      <i class="fas fa-star"></i> "<%= @daily_quote.quote %>"
+    </div>
+    <p class="text-muted mt-3">
+      <em>— <%= @daily_quote.author %></em>
+    </p>
+  <% else %>
+    <p class="text-muted">No quote available today. Please check back later.</p>
+  <% end %>
+</div>

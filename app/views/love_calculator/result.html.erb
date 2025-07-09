@@ -1,0 +1,123 @@
+<div class="row justify-content-center">
+  <div class="col-md-12 col-lg-10">
+    <div class="mystical-card">
+      <div class="card-header-mystical text-center py-4">
+        <h1 class="mb-2">
+          <i class="fas fa-crystal-ball"></i> Cosmic Reading Complete <i class="fas fa-magic"></i>
+        </h1>
+        <p class="mb-0 opacity-75">
+          <span style="color: var(--accent-gold);"><%= @person1_name.titleize %></span> & 
+          <span style="color: var(--accent-pink);"><%= @person2_name.titleize %></span>
+        </p>
+      </div>
+      
+      <div class="card-body p-4">
+        <!-- Individual Soul Readings -->
+        <div class="row mb-5">
+          <div class="col-md-6 mb-4">
+            <div class="mystical-card">
+              <div class="card-header-mystical text-center" style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));">
+                <h5 class="mb-0">
+                  <i class="fas fa-user-astronaut"></i> <%= @person1_name.titleize %>'s Aura
+                </h5>
+              </div>
+              <div class="card-body text-center">
+                <div class="flames-result mb-3">
+                  <%= @results[:person1][:result] %>
+                </div>
+                <h4 style="color: var(--accent-gold); font-family: 'Cinzel', serif;">
+                  <%= @results[:person1][:meaning] %>
+                </h4>
+                <p class="text-muted mb-3">
+                  <small><i class="fas fa-atom"></i> Cosmic Resonance: <%= @results[:person1][:steps] %></small>
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-4">
+            <div class="mystical-card">
+              <div class="card-header-mystical text-center" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));">
+                <h5 class="mb-0">
+                  <i class="fas fa-user-astronaut"></i> <%= @person2_name.titleize %>'s Aura
+                </h5>
+              </div>
+              <div class="card-body text-center">
+                <div class="flames-result mb-3">
+                  <%= @results[:person2][:result] %>
+                </div>
+                <h4 style="color: var(--accent-gold); font-family: 'Cinzel', serif;">
+                  <%= @results[:person2][:meaning] %>
+                </h4>
+                <p class="text-muted mb-3">
+                  <small><i class="fas fa-atom"></i> Cosmic Resonance: <%= @results[:person2][:steps] %></small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Combined Cosmic Destiny -->
+        <div class="row justify-content-center mb-4">
+          <div class="col-md-10">
+            <div class="mystical-card">
+              <div class="card-header-mystical text-center py-4" style="background: linear-gradient(135deg, #6c5ce7, #fd79a8, #fdcb6e);">
+                <h3 class="mb-0">
+                  <i class="fas fa-infinity"></i> United Cosmic Destiny <i class="fas fa-heart"></i>
+                </h3>
+              </div>
+              <div class="card-body text-center">
+                <div class="flames-result mb-4" style="font-size: 5rem;">
+                  <%= @results[:combined][:result] %>
+                </div>
+                <h2 style="color: var(--accent-gold); font-family: 'Cinzel', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                  <%= @results[:combined][:meaning] %>
+                </h2>
+                <p class="text-muted mb-4">
+                  <small><i class="fas fa-galaxy"></i> Combined Cosmic Force: <%= @results[:combined][:steps] %></small>
+                </p>
+                
+                <div class="p-4 rounded" style="background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(253, 121, 168, 0.1)); border: 2px solid rgba(253, 203, 110, 0.3);">
+                  <i class="fas fa-star" style="color: var(--accent-gold);"></i> 
+                  <strong style="color: var(--accent-gold);">Sacred Advice:</strong><br>
+                  <%= @results[:combined][:tip] %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mystical Actions -->
+        <div class="text-center mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="d-flex flex-wrap justify-content-center gap-3">
+                <%= link_to root_path, class: "btn btn-mystical" do %>
+                  <i class="fas fa-redo"></i> Try Again
+                <% end %>
+                
+                <%= link_to leaderboard_path, class: "btn btn-mystical" do %>
+                  <i class="fas fa-trophy"></i> Cosmic Rankings
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@media print {
+  .btn, .navbar, .floating-hearts { display: none !important; }
+  .mystical-card { border: 2px solid #000 !important; }
+  body { background: white !important; color: black !important; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+</style>

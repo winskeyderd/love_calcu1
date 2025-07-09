@@ -1,0 +1,2 @@
+module LoveTestsHelper
+end

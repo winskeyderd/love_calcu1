@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="mystical-card">
+      <div class="card-header-mystical text-center py-4">
+        <h1 class="mb-2">
+          <i class="fas fa-user-astronaut"></i> Cosmic Profile <i class="fas fa-star"></i>
+        </h1>
+        <p class="mb-0 opacity-75">Your Journey Through the Stars</p>
+      </div>
+      
+      <div class="card-body p-4">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="text-center mb-4">
+              <div class="d-inline-block p-4 rounded-circle" style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); font-size: 3rem;">
+                👤
+              </div>
+            </div>
+            
+            <div class="text-center mb-4">
+              <h3 style="color: var(--accent-gold); font-family: 'Cinzel', serif;">
+                <%= @user.email.split('@').first.humanize %>
+              </h3>
+              <p class="text-muted">@<%= @user.email.split('@').first %></p>
+            </div>
+            
+            <!-- Streak Display -->
+            <div class="mystical-card mb-4">
+              <div class="card-body text-center">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">
+                  <% if (@user.login_streak || 0) > 7 %>
+                    🔥
+                  <% elsif (@user.login_streak || 0) > 3 %>
+                    ⚡
+                  <% else %>
+                    ✨
+                  <% end %>
+                </div>
+                <h4 style="color: var(--accent-gold);">
+                  <%= @user.login_streak || 0 %>-Day Streak
+                </h4>
+                <p class="text-muted mb-0">
+                  <% if (@user.login_streak || 0) > 1 %>
+                    Keep the cosmic energy flowing!
+                  <% else %>
+                    Start your mystical journey!
+                  <% end %>
+                </p>
+              </div>
+            </div>
+            
+            <!-- Statistics -->
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="mystical-card">
+                  <div class="card-body text-center">
+                    <h5 style="color: var(--accent-purple);">
+                      <%= @total_readings %>
+                    </h5>
+                    <small>Total Readings</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mystical-card">
+                  <div class="card-body text-center">
+                    <h5 style="color: var(--accent-pink);">
+                      <%= @user.created_at.strftime("%B %Y") %>
+                    </h5>
+                    <small>Joined</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <% if @recent_readings.any? %>
+              <div class="mystical-card mb-4">
+                <div class="card-header-mystical text-center py-3">
+                  <h5 class="mb-0">Recent Activity</h5>
+                </div>
+                <div class="card-body">
+                  <% @recent_readings.each do |reading| %>
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="me-3" style="font-size: 1.2rem;">
+                        <%= reading.result %>
+                      </div>
+                      <div class="flex-grow-1">
+                        <small>
+                          <%= reading.person1_name.titleize %> & <%= reading.person2_name.titleize %>
+                        </small>
+                      </div>
+                      <small class="text-muted">
+                        <%= time_ago_in_words(reading.created_at) %> ago
+                      </small>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+            
+            <div class="text-center">
+              <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-mystical" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

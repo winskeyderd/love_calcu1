@@ -1,0 +1,2 @@
+class LoveTest < ApplicationRecord
+end

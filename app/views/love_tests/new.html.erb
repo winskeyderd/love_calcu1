@@ -1,0 +1,26 @@
+<h1>Love Calculator</h1>
+
+<%= form_with model: @love_test, local: true do |form| %>
+  <div>
+    <%= form.label :given_name_a, "Your First Name" %><br>
+    <%= form.text_field :given_name_a %>
+  </div>
+
+  <div>
+    <%= form.label :surname_a, "Your Surname" %><br>
+    <%= form.text_field :surname_a %>
+  </div>
+
+  <div>
+    <%= form.label :given_name_b, "Their First Name" %><br>
+    <%= form.text_field :given_name_b %>
+  </div>
+
+  <div>
+    <%= form.label :surname_b, "Their Surname" %><br>
+    <%= form.text_field :surname_b %>
+  </div>
+
+  <br>
+  <%= form.submit "Calculate Compatibility" %>
+<% end %>

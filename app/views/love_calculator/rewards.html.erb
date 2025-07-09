@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+  <div class="col-md-12 col-lg-10">
+    <!-- Daily Quote -->
+    <div class="mystical-card mb-4">
+      <div class="card-header-mystical text-center py-3">
+        <h3 class="mb-0">
+          <i class="fas fa-quote-left"></i> Daily Cosmic Wisdom <i class="fas fa-sun"></i>
+        </h3>
+      </div>
+      <div class="card-body text-center p-4">
+        <div class="tarot-message" style="font-size: 1.2rem; border-left-color: var(--accent-gold);">
+          <i class="fas fa-star"></i> "<%= @daily_quote.content %>"
+        </div>
+        <p class="text-muted mt-3">
+          <em>— <%= @daily_quote.author %></em>
+        </p>
+      </div>
+    </div>
+    
+    <!-- Weekly Card Section -->
+    <div class="mystical-card mb-4">
+      <div class="card-header-mystical text-center py-3">
+        <h3 class="mb-0">
+          <i class="fas fa-magic"></i> Weekly Mystical Card <i class="fas fa-cards-blank"></i>
+        </h3>
+      </div>
+      <div class="card-body p-4">
+        <% if @current_weekly_card %>
+          <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+              <div class="card-icon" style="font-size: 4rem; margin-bottom: 1rem;">
+                <%= @current_weekly_card.image_url %>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <h4 style="color: var(--accent-gold); font-family: 'Cinzel', serif;">
+                <%= @current_weekly_card.title %>
+              </h4>
+              <p class="mb-3"><%= @current_weekly_card.description %></p>
+              <div class="tarot-message">
+                <i class="fas fa-eye"></i> <%= @current_weekly_card.meaning %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="text-center">
+            <% if @can_draw_card %>
+              <div class="card-placeholder mb-4" style="font-size: 5rem; color: var(--accent-purple); opacity: 0.3;">
+                🔮
+              </div>
+              <h5 style="color: var(--accent-gold);">Draw Your Weekly Card</h5>
+              <p class="text-muted mb-4">Discover what the cosmos has in store for you this week.</p>
+              <%= link_to "Draw Card", draw_weekly_card_path, method: :post, class: "btn btn-mystical btn-lg" %>
+            <% else %>
+              <div class="card-placeholder mb-4" style="font-size: 5rem; color: var(--accent-purple); opacity: 0.3;">
+                ⏰
+              </div>
+              <h5 style="color: var(--accent-gold);">Card Already Drawn</h5>
+              <p class="text-muted">You can draw a new card in a few days. Check your card history below.</p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <!-- Recent Cards History -->
+    <% if @recent_cards.any? %>
+      <div class="mystical-card">
+        <div class="card-header-mystical text-center py-3">
+          <h4 class="mb-0">
+            <i class="fas fa-history"></i> Recent Cards
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <% @recent_cards.each do |user_card| %>
+              <div class="col-md-6 col-lg-4 mb-3">
+                <div class="mystical-card">
+                  <div class="card-body text-center">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+                      <%= user_card.weekly_card.image_url %>
+                    </div>
+                    <h6 style="color: var(--accent-gold);">
+                      <%= user_card.weekly_card.title %>
+                    </h6>
+                    <small class="text-muted">
+                      <%= user_card.drawn_at.strftime("%B %d, %Y") %>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

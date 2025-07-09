@@ -1,0 +1,150 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="mystical-card">
+      <div class="card-header-mystical text-center py-4">
+        <h1 class="mb-2">
+          <i class="fas fa-moon"></i> Cosmic Love Oracle <i class="fas fa-stars"></i>
+        </h1>
+        <p class="mb-0 opacity-75">Let the stars reveal your romantic destiny through the art of FLAMES</p>
+      </div>
+
+      <div class="card-body p-4">
+        <%= form_with url: calculate_path, method: :post, local: true, class: "needs-validation", novalidate: true do |f| %>
+          <div class="text-center mb-4">
+            <div class="d-inline-block p-3" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); border-radius: 50%; animation: pulse 2s infinite;">
+              <i class="fas fa-heart text-white" style="font-size: 2rem;"></i>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="text-center mb-4">
+                <h5 class="text-center mb-3" style="color: var(--accent-gold); font-family: 'Cinzel', serif;">
+                  <i class="fas fa-user-circle"></i> First Soul
+                </h5>
+              </div>
+
+              <div class="mb-3">
+                <%= f.label :person1_first, "Given Name", class: "form-label", style: "color: var(--text-gold);" %>
+                <%= f.text_field :person1_first, class: "form-control form-control-mystical", placeholder: "Enter Given name", required: true, oninput: "validateNameInput(this)" %>
+                <div class="invalid-feedback">
+                  The spirits require a name to read your fortune.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <%= f.label :person1_last, "Surname", class: "form-label", style: "color: var(--text-gold);" %>
+                <%= f.text_field :person1_last, class: "form-control form-control-mystical", placeholder: "Enter Surname", required: true, oninput: "validateNameInput(this)" %>
+                <div class="invalid-feedback">
+                  The cosmic forces need your complete identity.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="text-center mb-4">
+                <h5 class="text-center mb-3" style="color: var(--accent-pink); font-family: 'Cinzel', serif;">
+                  <i class="fas fa-user-circle"></i> Second Soul
+                </h5>
+              </div>
+
+              <div class="mb-3">
+                <%= f.label :person2_first, "Given Name", class: "form-label", style: "color: var(--text-gold);" %>
+                <%= f.text_field :person2_first, class: "form-control form-control-mystical", placeholder: "Enter Given name", required: true, oninput: "validateNameInput(this)" %>
+                <div class="invalid-feedback">
+                  The spirits require a name to read your fortune.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <%= f.label :person2_last, "Surname", class: "form-label", style: "color: var(--text-gold);" %>
+                <%= f.text_field :person2_last, class: "form-control form-control-mystical", placeholder: "Enter Surname", required: true, oninput: "validateNameInput(this)" %>
+                <div class="invalid-feedback">
+                  The cosmic forces need your complete identity.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <%= f.submit "🔮 Reveal Destiny", class: "btn btn-mystical btn-lg px-5" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mt-4 text-center">
+      <div class="mystical-card">
+        <div class="card-body">
+          <h6 class="card-title" style="color: var(--accent-gold); font-family: 'Cinzel', serif;">Sacred FLAMES Oracle</h6>
+          <div class="row text-sm mt-3">
+            <div class="col-6 col-md-2 mb-2">
+              <span style="color: var(--accent-purple); font-weight: bold;">F</span>
+              <small class="d-block">Friends</small>
+            </div>
+            <div class="col-6 col-md-2 mb-2">
+              <span style="color: var(--accent-pink); font-weight: bold;">L</span>
+              <small class="d-block">Lovers</small>
+            </div>
+            <div class="col-6 col-md-2 mb-2">
+              <span style="color: var(--accent-gold); font-weight: bold;">A</span>
+              <small class="d-block">Affection</small>
+            </div>
+            <div class="col-6 col-md-2 mb-2">
+              <span style="color: var(--accent-blue); font-weight: bold;">M</span>
+              <small class="d-block">Marriage</small>
+            </div>
+            <div class="col-6 col-md-2 mb-2">
+              <span style="color: #e74c3c; font-weight: bold;">E</span>
+              <small class="d-block">Enemies</small>
+            </div>
+            <div class="col-6 col-md-2 mb-2">
+              <span style="color: #2ecc71; font-weight: bold;">S</span>
+              <small class="d-block">Siblings</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript block -->
+<script>
+// Bootstrap validation
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+// Focus glow effect
+document.addEventListener('DOMContentLoaded', function() {
+  const inputs = document.querySelectorAll('.form-control-mystical');
+
+  inputs.forEach(input => {
+    input.addEventListener('focus', function() {
+      this.style.boxShadow = '0 0 20px rgba(253, 203, 110, 0.5)';
+    });
+
+    input.addEventListener('blur', function() {
+      this.style.boxShadow = 'none';
+    });
+  });
+});
+
+// 🔮 Restrict input to only letters, spaces, apostrophes, and hyphens
+function validateNameInput(input) {
+  input.value = input.value.replace(/[^A-Za-z\s'-]/g, '');
+}
+</script>

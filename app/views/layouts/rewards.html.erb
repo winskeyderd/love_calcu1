@@ -1,0 +1,379 @@
+<div class="daily-quote-card">
+  <% if @daily_quote.present? %>
+    <div class="quote-reveal-container">
+      <!-- Unrevealed State -->
+      <div class="quote-unrevealed" id="quoteUnrevealed">
+        <div class="mystery-card">
+          <div class="card-glow"></div>
+          <div class="mystery-content">
+            <i class="fas fa-gift mystery-icon"></i>
+            <h3 class="mystery-title">Daily Inspiration Awaits</h3>
+            <p class="mystery-subtitle">Click to reveal your quote of the day</p>
+            <button class="reveal-button" onclick="revealQuote()">
+              <i class="fas fa-unlock-alt"></i>
+              Claim Your Quote
+            </button>
+          </div>
+          <div class="sparkles">
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revealed State -->
+      <div class="quote-revealed hidden" id="quoteRevealed">
+        <div class="quote-container">
+          <div class="quote-icon">
+            <i class="fas fa-quote-left"></i>
+          </div>
+          <blockquote class="quote-text">
+            <%= @daily_quote.quote %>
+          </blockquote>
+          <div class="quote-author">
+            <i class="fas fa-star quote-star"></i>
+            <span>— <%= @daily_quote.author %></span>
+          </div>
+          <div class="claimed-badge">
+            <i class="fas fa-check-circle"></i>
+            Quote Claimed!
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="no-quote-message">
+      <i class="fas fa-moon"></i>
+      <p>No quote available today.</p>
+      <small>Please check back later for your daily inspiration.</small>
+    </div>
+  <% end %>
+</div>
+
+<style>
+.daily-quote-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.daily-quote-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-gold, #d4af37), #f4d03f, var(--accent-gold, #d4af37));
+}
+
+.quote-reveal-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Unrevealed State */
+.quote-unrevealed {
+  text-align: center;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.mystery-card {
+  position: relative;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.mystery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+}
+
+.card-glow {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-gold, #d4af37), #f4d03f, var(--accent-gold, #d4af37));
+  border-radius: 14px;
+  z-index: -1;
+  opacity: 0.7;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.mystery-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--accent-gold, #d4af37);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+.mystery-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.mystery-subtitle {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #e2e8f0;
+  opacity: 0.9;
+}
+
+.reveal-button {
+  background: linear-gradient(45deg, var(--accent-gold, #d4af37), #f4d03f);
+  color: #2c3e50;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.reveal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.reveal-button i {
+  margin-right: 0.5rem;
+}
+
+/* Sparkles Animation */
+.sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-gold, #d4af37);
+  border-radius: 50%;
+  animation: sparkle 2s linear infinite;
+}
+
+.sparkle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+.sparkle:nth-child(2) { top: 30%; right: 25%; animation-delay: 0.5s; }
+.sparkle:nth-child(3) { bottom: 30%; left: 30%; animation-delay: 1s; }
+.sparkle:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 1.5s; }
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Revealed State */
+.quote-revealed {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.quote-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.quote-icon {
+  color: var(--accent-gold, #d4af37);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.quote-text {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin: 0 0 1.5rem 0;
+  font-weight: 400;
+  font-style: italic;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.quote-star {
+  color: var(--accent-gold, #d4af37);
+  font-size: 0.8rem;
+}
+
+.claimed-badge {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: slideIn 0.5s ease-out 0.3s both;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+/* No Quote Message */
+.no-quote-message {
+  text-align: center;
+  color: #6c757d;
+  padding: 2rem 1rem;
+}
+
+.no-quote-message i {
+  font-size: 2.5rem;
+  color: var(--accent-gold, #d4af37);
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.no-quote-message p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+.no-quote-message small {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .daily-quote-card {
+    padding: 1.5rem;
+  }
+  
+  .mystery-card {
+    padding: 1.5rem;
+  }
+  
+  .mystery-icon {
+    font-size: 2.5rem;
+  }
+  
+  .mystery-title {
+    font-size: 1.3rem;
+  }
+  
+  .quote-text {
+    font-size: 1.1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .quote-icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .daily-quote-card {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .quote-text {
+    color: #ecf0f1;
+  }
+  
+  .quote-author {
+    color: #bdc3c7;
+  }
+  
+  .no-quote-message p {
+    color: #ecf0f1;
+  }
+  
+  .no-quote-message {
+    color: #bdc3c7;
+  }
+}
+</style>
+
+<script>
+function revealQuote() {
+  const unrevealed = document.getElementById('quoteUnrevealed');
+  const revealed = document.getElementById('quoteRevealed');
+  
+  // Add exit animation to unrevealed state
+  unrevealed.style.opacity = '0';
+  unrevealed.style.transform = 'scale(0.9)';
+  
+  // After animation completes, switch visibility
+  setTimeout(() => {
+    unrevealed.classList.add('hidden');
+    revealed.classList.remove('hidden');
+  }, 500);
+}</script>

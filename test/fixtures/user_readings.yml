@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  person1_first: MyString
+  person1_last: MyString
+  person2_first: MyString
+  person2_last: MyString
+  result: MyString
+
+two:
+  user: two
+  person1_first: MyString
+  person1_last: MyString
+  person2_first: MyString
+  person2_last: MyString
+  result: MyString

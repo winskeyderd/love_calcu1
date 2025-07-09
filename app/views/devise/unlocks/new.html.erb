@@ -1,0 +1,22 @@
+<h4 class="text-center mb-3 flames-result">Resend Unlock Instructions</h4>
+
+<div class="d-flex justify-content-center">
+  <div class="mystical-card p-3" style="max-width: 460px; width: 100%;">
+    <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="mb-3">
+        <%= f.label :email, class: "form-label small mb-1" %>
+        <%= f.email_field :email, class: "form-control-mystical form-control-sm", autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="d-grid mt-3">
+        <%= f.submit "Resend unlock instructions", class: "btn btn-mystical btn-sm" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

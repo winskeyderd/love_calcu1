@@ -1,0 +1,240 @@
+# app/views/love_calculator/result.html.erb
+<div class="row justify-content-center">
+  <div class="col-md-12 col-lg-10">
+    <div class="mystical-card">
+      <div class="card-header-mystical text-center py-4">
+        <h1 class="mb-2">
+          <i class="fas fa-crystal-ball"></i> Cosmic Reading Complete <i class="fas fa-magic"></i>
+        </h1>
+        <p class="mb-0 opacity-75">
+          <span style="color: var(--accent-gold);"><%= @person1_name.titleize %></span> & 
+          <span style="color: var(--accent-pink);"><%= @person2_name.titleize %></span>
+        </p>
+      </div>
+      
+      <div class="card-body p-4">
+        <!-- Individual Soul Readings -->
+        <div class="row mb-5">
+          <div class="col-md-6 mb-4">
+            <div class="mystical-card">
+              <div class="card-header-mystical text-center" style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));">
+                <h5 class="mb-0">
+                  <i class="fas fa-user-astronaut"></i> <%= @person1_name.titleize %>'s Aura
+                </h5>
+              </div>
+              <div class="card-body text-center">
+                <div class="flames-result mb-3">
+                  <%= @results[:person1][:result] %>
+                </div>
+                <h4 style="color: var(--accent-gold); font-family: 'Cinzel', serif;">
+                  <%= @results[:person1][:meaning] %>
+                </h4>
+                <p class="text-muted mb-3">
+                  <small><i class="fas fa-atom"></i> Cosmic Resonance: <%= @results[:person1][:steps] %></small>
+                </p>
+                
+                <!-- Tie-breaker info for person1 -->
+                <% if @results[:person1][:debug_info][:tiebreaker_used] %>
+                  <div class="alert alert-info mb-3" style="background: rgba(116, 185, 255, 0.1); border: 1px solid rgba(116, 185, 255, 0.3); color: var(--accent-blue);">
+                    <i class="fas fa-balance-scale"></i> <strong>Cosmic Tie-breaker:</strong><br>
+                    Multiple letters tied with <%= @results[:person1][:debug_info][:max_frequency] %> occurrences: 
+                    <span style="color: var(--accent-gold);"><%= @results[:person1][:debug_info][:tied_letters].join(', ') %></span><br>
+                    <small>Final iteration among tied letters determined: <strong><%= @results[:person1][:result] %></strong></small>
+                  </div>
+                <% end %>
+                
+                <div class="tarot-message">
+                  <i class="fas fa-scroll"></i> <%= @results[:person1][:tarot_message] %>
+                </div>
+                <div class="mt-3 p-3 rounded" style="background: rgba(108, 92, 231, 0.1); border: 1px solid rgba(108, 92, 231, 0.3);">
+                  <i class="fas fa-lightbulb" style="color: var(--ccessit-gold);"></i> 
+                  <strong>Guidance:</strong> <%= @results[:person1][:tip] %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-4">
+            <div class="mystical-card">
+              <div class="card-header-mystical text-center" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));">
+                <h5 class="mb-0">
+                  <i class="fas fa-user-astronaut"></i> <%= @person2_name.titleize %>'s Aura
+                </h5>
+              </div>
+              <div class="card-body text-center">
+                <div class="flames-result mb-3">
+                  <%= @results[:person2][:result] %>
+                </div>
+                <h4 style="color: var(--accent-gold); font-family: 'Cinzel', serif;">
+                  <%= @results[:person2][:meaning] %>
+                </h4>
+                <p class="text-muted mb-3">
+                  <small><i class="fas fa-atom"></i> Cosmic Resonance: <%= @results[:person2][:steps] %></small>
+                </p>
+                
+                <!-- Tie-breaker info for person2 -->
+                <% if @results[:person2][:debug_info][:tiebreaker_used] %>
+                  <div class="alert alert-info mb-3" style="background: rgba(116, 185, 255, 0.1); border: 1px solid rgba(2016, 185, 255, 0.3); color: var(--accent-blue);">
+                    <i class="fas fa-balance-scale"></i> <strong>Cosmic Tie-breaker:</strong><br>
+                    Multiple letters tied with <%= @results[:person2][:debug_info][:max_frequency] %> occurrences: 
+                    <span style="color: var(--accent-gold);"><%= @results[:person2][:debug_info][:tied_letters].join(', ') %></span><br>
+                    <small>Final iteration among tied letters determined: <strong><%= @results[:person2][:result] %></strong></small>
+                  </div>
+                <% end %>
+                
+                <div class="tarot-message">
+                  <i class="fas fa-scroll"></i> <%= @results[:person2][:tarot_message] %>
+                </div>
+                <div class="mt-3 p-3 rounded" style="background: rgba(108, 92, 231, 0.1); border: 1px solid rgba(108, 92, 231, 0.3);">
+                  <i class="fas fa-lightbulb" style="color: var(--accent-gold);"></i> 
+                  <strong>Guidance:</strong> <%= @results[:person2][:tip] %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Combined Cosmic Destiny -->
+        <div class="row justify-content-center mb-4">
+          <div class="col-md-10">
+            <div class="mystical-card">
+              <div class="card-header-mystical text-center py-4" style="background: linear-gradient(135deg, #6c5ce7, #fd79a8, #fdcb6e);">
+                <h3 class="mb-0">
+                  <i class="fas fa-infinity"></i> United Cosmic Destiny <i class="fas fa-heart"></i>
+                </h3>
+              </div>
+              <div class="card-body text-center">
+                <div class="flames-result mb-4" style="font-size: 5rem;">
+                  <%= @results[:combined][:result] %>
+                </div>
+                <h2 style="color: var(--accent-gold); font-family: 'Cinzel', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                  <%= @results[:combined][:meaning] %>
+                </h2>
+                
+                <!-- Compatibility Percentage -->
+                <div class="compatibility-percentage mb-4">
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="p-3 rounded" style="background: linear-gradient(135deg, rgba(253, 203, 110, 0.2), rgba(253, 121, 168, 0.2)); border: 2px solid rgba(253, 203, 110, 0.5);">
+                        <h4 style="color: var(--accent-gold); font-family: 'Cinzel', serif; margin-bottom: 10px;">
+                          <i class="fas fa-percentage"></i> Cosmic Compatibility
+                        </h4>
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--accent-pink);">
+                          <%= @results[:combined][:compatibility_percentage] %>%
+                        </div>
+                        <div class="progress mt-2" style="height: 20px; background: rgba(0,0,0,0.3);">
+                          <div class="progress-bar" role="progressbar" 
+                               style="width: <%= @results[:combined][:compatibility_percentage] %>%; 
+                                      background: linear-gradient(90deg, #6c5ce7, #fd79a8, #fdcb6e);" 
+                               aria-valuenow="<%= @results[:combined][:compatibility_percentage] %>" 
+                               aria-valuemin="0" 
+                               aria-valuemax="100">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <p class="text-muted mb-4">
+                  <small><i class="fas fa-galaxy"></i> Combined Cosmic Force: <%= @results[:combined][:steps] %></small>
+                </p>
+                
+                <!-- Tie-breaker info for combined -->
+                <% if @results[:combined][:debug_info][:tiebreaker_used] %>
+                  <div class="alert alert-warning mb-4" style="background: rgba(253, 203, 110, 0.1); border: 1px solid rgba(253, 203, 110, 0.3); color: var(--accent-gold);">
+                    <i class="fas fa-balance-scale"></i> <strong>Cosmic Tie-breaker Activated:</strong><br>
+                    The universe revealed a tie between <%= @results[:combined][:debug_info][:tied_letters].join(', ') %> 
+                    (each with <%= @results[:combined][:debug_info][:max_frequency] %> occurrences)<br>
+                    <small>A final cosmic iteration among the tied letters has determined your destiny: <strong><%= @results[:combined][:result] %></strong></small>
+                  </div>
+                <% end %>
+                
+                <div class="tarot-message mb-4" style="font-size: 1.2rem; border-left-color: var(--accent-pink);">
+                  <i class="fas fa-magic"></i> <%= @results[:combined][:tarot_message] %>
+                </div>
+                <div class="p-4 rounded" style="background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(253, 121, 168, 0.1)); border: 2px solid rgba(253, 203, 110, 0.3);">
+                  <i class="fas fa-star" style="color: var(--accent-gold);"></i> 
+                  <strong style="color: var(--accent-gold);">Sacred Wisdom:</strong><br>
+                  <%= @results[:combined][:tip] %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Debug Information (Optional - for testing) -->
+        <% if Rails.env.development? %>
+          <div class="row justify-content-center mb-4">
+            <div class="col-md-10">
+              <div class="mystical-card">
+                <div class="card-header-mystical text-center">
+                  <h6 class="mb-0"><i class="fas fa-bug"></i> Debug Information</h6>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h6><%= @person1_name.titleize %></h6>
+                      <pre style="font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px;"><%= JSON.pretty_generate(@results[:person1][:debug_info]) %></pre>
+                    </div>
+                    <div class="col-md-4">
+                      <h6><%= @person2_name.titleize %></h6>
+                      <pre style="font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px;"><%= JSON.pretty_generate(@results[:person2][:debug_info]) %></pre>
+                    </div>
+                    <div class="col-md-4">
+                      <h6>Combined (Compatibility: <%= @results[:combined][:compatibility_percentage] %>%)</h6>
+                      <pre style="font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px;"><%= JSON.pretty_generate(@results[:combined][:debug_info]) %></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        
+        <!-- Mystical Actions -->
+        <div class="text-center mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="d-flex flex-wrap justify-content-center gap-3">
+                <%= link_to root_path, class: "btn btn-mystical" do %>
+                  <i class="fas fa-redo"></i> Divine Again
+                <% end %>
+                
+                <button onclick="window.print()" class="btn btn-mystical" style="background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));">
+                  <i class="fas fa-scroll"></i> Save Reading
+                </button>
+                
+                <%= link_to leaderboard_path, class: "btn btn-mystical" do %>
+                  <i class="fas fa-trophy"></i> Cosmic Rankings
+                <% end %>
+              </2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.compatibility-percentage {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.progress-bar {
+  transition: width 2s ease-in-out;
+}
+
+@media print {
+  .btn, .navbar, .floating-hearts { display: none !important; }
+  .mystical-card { border: 2px solid #000 !important; }
+  body { background: white !important; color: black !important; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+</style></asm>
