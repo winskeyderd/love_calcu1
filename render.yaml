@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: rails-app
+    env: ruby
+    buildCommand: "" # disables asset:precompile
+    startCommand: bundle exec rails server -p $PORT
