@@ -86,4 +86,8 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # ✅ Fix: allow asset compilation even if secrets like SECRET_KEY_BASE are not properly set
+  config.assets.compile = true
+  config.assets.initialize_on_precompile = false
 end
